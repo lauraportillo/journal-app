@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, TextField, Typography } from '@mui/material';
 
 export const LoginPage = () => {
   return (
@@ -28,6 +28,17 @@ export const LoginPage = () => {
           <Typography variant="h5" sx={{ mb: 1 }}>
             Login
           </Typography>
+          <form>
+            <Grid container>
+              <Grid item xs={12} sx={{ mt: 2 }}>
+                <TextField label="email" type="email" placeholder="email@google.com" fullWidth />
+              </Grid>
+
+              <Grid item xs={12} sx={{ mt: 2 }}>
+                <TextField label="password" type="password" placeholder="password" fullWidth />
+              </Grid>
+            </Grid>
+          </form>
         </Grid>
       </Grid>
     </>
