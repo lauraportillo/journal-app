@@ -7,7 +7,7 @@ import { AuthLayout } from '../layout/AuthLayout';
 
 import { useForm } from '../../hooks/useForm';
 
-import { checkingAuthentication } from '../../store/auth/thunks';
+import { checkingAuthentication, startGoogleSignIn } from '../../store/auth';
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -20,12 +20,10 @@ export const LoginPage = () => {
   const onSubmit = (ev) => {
     ev.preventDefault();
     dispatch(checkingAuthentication());
-
-    console.log({ email, password });
   };
 
   const onGoogleSignIn = () => {
-    console.log('onGoogleSignIn');
+    dispatch(startGoogleSignIn());
   };
 
   return (
