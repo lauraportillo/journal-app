@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks/useForm';
 
 const formData = {
-  email: 'laura@google.com',
-  password: '123456',
-  displayName: 'Laura Portillo',
+  email: '',
+  password: '',
+  displayName: '',
 };
 
 const formValidations = {
@@ -16,6 +17,8 @@ const formValidations = {
 };
 
 export const RegisterPage = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const {
     formState,
     displayName,
@@ -28,15 +31,14 @@ export const RegisterPage = () => {
     passwordValid,
   } = useForm(formData, formValidations);
 
-  console.log(displayNameValid);
-
   const onSubmit = (ev) => {
     ev.preventDefault();
-    console.log(formState);
+    setFormSubmitted(true);
   };
 
   return (
     <AuthLayout title="Register">
+      <h1>FormValid:{isFormValid ? 'Correct' : 'Incorrect'}</h1>
       <form onSubmit={onSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -48,7 +50,7 @@ export const RegisterPage = () => {
               name="displayName"
               value={displayName}
               onChange={onInputChange}
-              error={!displayNameValid}
+              error={!!displayNameValid && formSubmitted}
               helperText={displayNameValid}
             />
           </Grid>
@@ -62,6 +64,8 @@ export const RegisterPage = () => {
               name="email"
               value={email}
               onChange={onInputChange}
+              error={!!emailValid && formSubmitted}
+              helperText={emailValid}
             />
           </Grid>
 
@@ -74,6 +78,8 @@ export const RegisterPage = () => {
               name="password"
               value={password}
               onChange={onInputChange}
+              error={!!passwordValid && formSubmitted}
+              helperText={passwordValid}
             />
           </Grid>
 
