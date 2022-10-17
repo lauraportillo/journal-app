@@ -28,6 +28,8 @@ export const RegisterPage = () => {
     passwordValid,
   } = useForm(formData, formValidations);
 
+  console.log(displayNameValid);
+
   const onSubmit = (ev) => {
     ev.preventDefault();
     console.log(formState);
