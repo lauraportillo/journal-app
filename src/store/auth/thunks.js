@@ -1,6 +1,6 @@
 
 // IMPORTAMOS LOS PROVEEDORES:
-import { loginWithEmailPassword, registerUserWithEmailPassword, singInWithGoogle, logoutFirebase } from '../../firebase/providers';
+import { registerUserWithEmailPassword, singInWithGoogle } from '../../firebase/providers';
 import { checkingCredentials, logout, login } from './';
 
 
@@ -35,33 +35,35 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
 
         dispatch(login(result))
 
-    }
-
-}
-
-
-// Cuarto thunk
-export const startLoginWithEmailPassword = ({ email, password }) => {
-    return async (dispatch) => {
-
-        dispatch(checkingCredentials());
-
-        const result = await loginWithEmailPassword({ email, password });
         console.log(result);
 
-        if (!result.ok) return dispatch(logout(result));
-        dispatch(login(result));
-
     }
+
 }
 
-// Quinto thunk
-export const startLogout = () => {
-    return async (dispatch) => {
 
-        await logoutFirebase();
+// // Cuarto thunk
+// export const startLoginWithEmailPassword = ({ email, password }) => {
+//     return async (dispatch) => {
 
-        dispatch(logout());
+//         dispatch(checkingCredentials());
 
-    }
-}
+//         const result = await loginWithEmailPassword({ email, password });
+//         console.log(result);
+
+//         if (!result.ok) return dispatch(logout(result));
+//         dispatch(login(result));
+
+//     }
+// }
+
+// // Quinto thunk
+// export const startLogout = () => {
+//     return async (dispatch) => {
+
+//         await logoutFirebase();
+
+//         dispatch(logout());
+
+//     }
+// }
