@@ -9,9 +9,7 @@ export const singInWithGoogle = async () => {
     try {
 
         const result = await signInWithPopup(FirebaseAuth, googleProvider);
-        // const credentials = GoogleAuthProvider.credentialFromResult(result);
-        const user = result.user;
-
+        // const credentials = GoogleAuthProvider.credentialFromResult( result );
         const { displayName, email, photoURL, uid } = result.user;
 
         return {
@@ -19,7 +17,6 @@ export const singInWithGoogle = async () => {
             // User info
             displayName, email, photoURL, uid
         }
-
 
 
     } catch (error) {
@@ -41,9 +38,10 @@ export const registerUserWithEmailPassword = async ({ email, password, displayNa
     try {
         const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
         const { uid, photoURL } = resp.user;
+        console.log(resp);
 
         // Para actualizar el displayName en Firebase:
-        await updateProfile(FirebaseAuth.currentUser, { displayName });
+        // await updateProfile(FirebaseAuth.currentUser, { displayName });
 
         return {
             ok: true,
