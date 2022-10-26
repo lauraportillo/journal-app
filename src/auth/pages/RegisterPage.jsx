@@ -24,7 +24,7 @@ export const RegisterPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const { status, errorMessage } = useSelector((state) => state.auth);
-  // const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
 
   const {
     formState,
@@ -49,7 +49,6 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title="Register">
-      <h1>FormValid:{isFormValid ? 'Correct' : 'Incorrect'}</h1>
       <form onSubmit={onSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -100,8 +99,7 @@ export const RegisterPage = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" fullWidth>
-                {/* <Button disabled={isCheckingAuthentication} type="submit" variant="contained" fullWidth> */}
+              <Button disabled={isCheckingAuthentication} type="submit" variant="contained" fullWidth>
                 Create an account
               </Button>
             </Grid>
