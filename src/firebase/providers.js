@@ -1,9 +1,9 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import { FirebaseAuth } from './config';
 
 const googleProvider = new GoogleAuthProvider();
 
-// PROVEEDOR: REGISTRARSE CON GOOGLE
+// PROVEEDOR 1: REGISTRARSE CON GOOGLE
 export const singInWithGoogle = async () => {
 
     try {
@@ -32,7 +32,7 @@ export const singInWithGoogle = async () => {
 
 }
 
-// PROVEEDOR: REGISTRARSE CON USUARIO Y PASSWORD
+// PROVEEDOR 2: REGISTRARSE CON USUARIO Y PASSWORD
 export const registerUserWithEmailPassword = async ({ email, password, displayName }) => {
 
     try {
@@ -48,29 +48,31 @@ export const registerUserWithEmailPassword = async ({ email, password, displayNa
         }
 
     } catch (error) {
-        console.log(error);
         return { ok: false, errorMessage: error.message }
     }
 
 }
 
-// // PROVEEDOR: LOGEARSE CON USUARIO Y PASSWORD
-// export const loginWithEmailPassword = async ({ email, password }) => {
+// PROVEEDOR 3: LOGEARSE CON USUARIO Y PASSWORD
+export const loginWithEmailPassword = async ({ email, password }) => {
 
-//     try {
-//         const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password);
-//         const { uid, photoURL, displayName } = resp.user;
+    try {
+        const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password);
+        const { uid, photoURL, displayName } = resp.user;
 
-//         return {
-//             ok: true,
-//             uid, photoURL, displayName
-//         }
+        return {
+            ok: true,
+            uid, photoURL, displayName
+        }
 
-//     } catch (error) {
-//         return { ok: false, errorMessage: error.message }
-//     }
-// }
+    } catch (error) {
+        return { ok: false, errorMessage: error.message }
+    }
+}
 
-// export const logoutFirebase = async () => {
-//     return await FirebaseAuth.signOut();
-// }
+
+// PROVEEDOR 4: LOGOUT
+
+export const logoutFirebase = async () => {
+    return await FirebaseAuth.signOut();
+}

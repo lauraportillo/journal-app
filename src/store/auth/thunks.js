@@ -1,10 +1,10 @@
 
 // IMPORTAMOS LOS PROVEEDORES:
-import { registerUserWithEmailPassword, singInWithGoogle } from '../../firebase/providers';
+import { singInWithGoogle, registerUserWithEmailPassword, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers';
 import { checkingCredentials, logout, login } from './';
 
 
-// Primer thunk checkingAuthentication
+// Primer thunk: checkingAuthentication
 export const checkingAuthentication = () => {
     return async (dispatch) => {
         dispatch(checkingCredentials());
@@ -12,7 +12,7 @@ export const checkingAuthentication = () => {
 }
 
 
-// Segundo thunk startGoogleSignIn
+// Segundo thunk: startGoogleSignIn
 export const startGoogleSignIn = () => {
     return async (dispatch) => {
         dispatch(checkingCredentials());
@@ -24,7 +24,7 @@ export const startGoogleSignIn = () => {
     }
 }
 
-// Tercer thunk startCreatingUserWithEmailPassword
+// Tercer thunk: startCreatingUserWithEmailPassword
 export const startCreatingUserWithEmailPassword = ({ email, password, displayName }) => {
     return async (dispatch) => {
 
@@ -41,28 +41,28 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
 }
 
 
-// // Cuarto thunk
-// export const startLoginWithEmailPassword = ({ email, password }) => {
-//     return async (dispatch) => {
+// Cuarto thunk: startLoginWithEmailPassword
+export const startLoginWithEmailPassword = ({ email, password }) => {
+    return async (dispatch) => {
 
-//         dispatch(checkingCredentials());
+        dispatch(checkingCredentials());
 
-//         const result = await loginWithEmailPassword({ email, password });
-//         console.log(result);
+        const result = await loginWithEmailPassword({ email, password });
+        console.log(result);
 
-//         if (!result.ok) return dispatch(logout(result));
-//         dispatch(login(result));
+        if (!result.ok) return dispatch(logout(result.errorMessage));
+        dispatch(login(result));
 
-//     }
-// }
+    }
+}
 
-// // Quinto thunk
-// export const startLogout = () => {
-//     return async (dispatch) => {
+// Quinto thunk: startLogout
+export const startLogout = () => {
+    return async (dispatch) => {
 
-//         await logoutFirebase();
+        await logoutFirebase();
 
-//         dispatch(logout());
+        dispatch(logout());
 
-//     }
-// }
+    }
+}
