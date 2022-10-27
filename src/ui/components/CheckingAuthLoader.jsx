@@ -1,3 +1,5 @@
+import { CircularProgress, Grid } from '@mui/material';
+
 export const CheckingAuthLoader = () => {
   return (
     <Grid
