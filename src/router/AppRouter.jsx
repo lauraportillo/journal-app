@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { FirebaseAuth } from '../firebase/config';
 
 import { login, logout } from '../store/auth';
@@ -32,9 +32,19 @@ export const AppRouter = () => {
 
   return (
     <Routes>
-      <Route path="/auth/*" element={<AuthRoutes />} />
+      {status === 'authenticated' ? (
+        <Route path="/*" element={<JournalRoutes />} />
+      ) : (
+        <Route path="/auth/*" element={<AuthRoutes />} />
+      )}
 
-      <Route path="/*" element={<JournalRoutes />} />
+      <Route path="/*" element={<Navigate to="/auth/login" />} />
+
+      {/* Login y Registro */}
+      {/* <Route path="/auth/*" element={ <AuthRoutes /> } /> */}
+
+      {/* JournalApp */}
+      {/* <Route path="/*" element={ <JournalRoutes /> } /> */}
     </Routes>
   );
 };
